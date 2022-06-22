@@ -27,12 +27,13 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
-    app.get( "/filteredImage", async ( req, res ) => {
+    app.get( "/filteredImage", async ( req: express.Request, res: express.Response ) => {
       let { image_url } = req.query;
       if(!image_url){
-        res.status(400).send(`<p>There is an error in the way you are using the software.</p>`+
+        let errorMessage400: string = `<p>There is an error in the way you are using the software.</p>`+
           `<p>Please use the syntax: <code style="background: #403f3d; color: whitesmoke; padding: 7px; border-radius: 3px">`+
-          `/filteredImage?image_url=<span style="color: orange">enter_url_here</span></code></p>`);
+          `/filteredImage?image_url=<span style="color: orange">enter_url_here</span></code></p>`
+        res.status(400).send(errorMessage400);
       }
       filterImageFromURL(image_url)
         // .then(image_path => console.log(image_path))
@@ -48,7 +49,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
-    let homePage = `<div style="width: 90%; margin: 0 auto;">`+
+    let homePage: string = `<div style="width: 90%; margin: 0 auto;">`+
     `<h1 style="border-bottom: 10px double #403f3d">Image Filter Software Submission for Udacity/ALX Cloud Dev Course</h1>`+
     `<h2>How to use:</h2>`+
     `<p><span style="color: maroon; font-weight: bold;">Picsum.photos</span> is a random image generator, like lorem ipsum text.</p>`+
