@@ -8,7 +8,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   const app = express();
 
   // Set the network port
-  const port = process.env.PORT || 8082;
+  const port: number = process.env.PORT || 8082;
   
   // Use the body parser middleware for post requests
   app.use(bodyParser.json());
@@ -28,7 +28,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
 
     app.get( "/filteredImage", async ( req: express.Request, res: express.Response ) => {
-      let { image_url } = req.query;
+      let { image_url: string } = req.query;
       if(!image_url){
         let errorMessage400: string = `<p>There is an error in the way you are using the software.</p>`+
           `<p>Please use the syntax: <code style="background: #403f3d; color: whitesmoke; padding: 7px; border-radius: 3px">`+
@@ -48,7 +48,7 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   
   // Root Endpoint
   // Displays a simple message to the user
-  app.get( "/", async ( req, res ) => {
+  app.get( "/", async ( req: express.Request, res: express.Response ) => {
     let homePage: string = `<div style="width: 90%; margin: 0 auto;">`+
     `<h1 style="border-bottom: 10px double #403f3d">Image Filter Software Submission for Udacity/ALX Cloud Dev Course</h1>`+
     `<h2>How to use:</h2>`+
